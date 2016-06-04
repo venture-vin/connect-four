@@ -28,10 +28,12 @@ function placePiece(column){
     gameField[column - 1][row - 1] = currentPlayer
   }
     if (hasWinner()) {
+      console.log("winner")
       alert(currentPlayer + " wins!")
       newGame();
     } else {
       switchPlayer();
+      console.log("switch player")
     }
 }
 
@@ -42,12 +44,22 @@ function whichRow(column) {
 
 
 function hasWinner(){
-  return checkColumn();
+  if (checkColumn()) { return true };
+  if (checkRow()) { return true };
 }
 
 function checkColumn() {
   for(var i = 0; i < gameField.length; i ++) {
     if (checkCurrentPlayer(gameField[i])) {
+      return true;
+    }
+  }
+}
+
+function checkRow() {
+  transposedGameField = transpose(gameField)
+  for(var i = 0; i < transposedGameField.length; i ++) {
+    if (checkCurrentPlayer(transposedGameField[i])) {
       return true;
     }
   }
@@ -59,15 +71,13 @@ function checkCurrentPlayer(array){
 
   for(var i = 0; i < array.length; i ++){
     if (array[i] == currentPlayer) {
-      counter ++ ;
+      counter ++;
+      if (counter >= 4) {
+        return true;
+      }
     } else {
       counter = 0;
     }
-  }
-  if (counter >= 4) {
-    return true;
-  } else {
-    return false;
   }
 }
 
@@ -83,6 +93,14 @@ function switchPlayer(){
 
 function endGame(){
   return currentPlayer;
+}
+
+function transpose(arr) {
+  return Object.keys(arr[0]).map(function (c) {
+    return arr.map(function (r) {
+      return r[c];
+    });
+  });
 }
 
 $(document).ready(function() {
