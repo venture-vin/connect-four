@@ -11,6 +11,7 @@
     border-width:1px;
     overflow:hidden;
     word-break:normal;
+    border-radius: 100%;
   }
 
   .tg th {
@@ -22,6 +23,7 @@
     border-width:1px;
     overflow:hidden;
     word-break:normal;
+    border-radius: 100%;
   }
 
   .tg .tg-s6z2{
