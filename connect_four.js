@@ -28,12 +28,10 @@ function placePiece(column){
     gameField[column - 1][row - 1] = currentPlayer
   }
     if (hasWinner()) {
-      console.log("winner")
       alert(currentPlayer + " wins!")
       newGame();
     } else {
       switchPlayer();
-      console.log("switch player")
     }
 }
 
