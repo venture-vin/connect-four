@@ -28,7 +28,7 @@ function placePiece(column){
     gameField[column - 1][row - 1] = currentPlayer
   }
     if (hasWinner()) {
-      alert(currentPlayer + "wins!")
+      alert(currentPlayer + " wins!")
       newGame();
     } else {
       switchPlayer();
@@ -47,18 +47,18 @@ function hasWinner(){
 
 function checkColumn() {
   for(var i = 0; i < gameField.length; i ++) {
-    if (checkRed(gameField[i])) {
+    if (checkCurrentPlayer(gameField[i])) {
       return true;
     }
   }
 }
 
-function checkRed(array){
+function checkCurrentPlayer(array){
   console.log(array)
   var counter = 0;
 
   for(var i = 0; i < array.length; i ++){
-    if (array[i] == "red") {
+    if (array[i] == currentPlayer) {
       counter ++ ;
     } else {
       counter = 0;
