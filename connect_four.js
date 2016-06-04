@@ -23,6 +23,7 @@ function placePiece(column){
   var selector = $(rowId + colId)
   $(rowId + " " + colId).css("background-color", currentPlayer)
   gameField[column - 1][row - 1] = "taken"
+  switchPlayer();
   //  hasWinner();
 }
 
