@@ -13,18 +13,26 @@ function newGame(){
   }
 
   currentPlayer = "red";
+
+  $("td").css("background-color", "white")
 };
 
 function placePiece(column){
   // insert piece into column at lowest unoccupied position
-  var row = whichRow(column);
-  var rowId = "#row-" + row;
-  var colId = "#col-" + column;
-  var selector = $(rowId + colId)
-  $(rowId + " " + colId).css("background-color", currentPlayer)
-  gameField[column - 1][row - 1] = "taken"
-  switchPlayer();
-  //  hasWinner();
+  if (gameField[column - 1].includes(0)) {
+    var row = whichRow(column);
+    var rowId = "#row-" + row;
+    var colId = "#col-" + column;
+    var selector = $(rowId + colId)
+    $(rowId + " " + colId).css("background-color", currentPlayer)
+    gameField[column - 1][row - 1] = currentPlayer
+  }
+    if (hasWinner()) {
+      alert(currentPlayer + "wins!")
+      newGame();
+    } else {
+      switchPlayer();
+    }
 }
 
 function whichRow(column) {
@@ -34,11 +42,35 @@ function whichRow(column) {
 
 
 function hasWinner(){
-// analyze the board for 4 in a row || 4 in a column
-// if yes
-// endGame();
-// else switchPlayer()
+  return checkColumn();
 }
+
+function checkColumn() {
+  for(var i = 0; i < gameField.length; i ++) {
+    if (checkRed(gameField[i])) {
+      return true;
+    }
+  }
+}
+
+function checkRed(array){
+  console.log(array)
+  var counter = 0;
+
+  for(var i = 0; i < array.length; i ++){
+    if (array[i] == "red") {
+      counter ++ ;
+    } else {
+      counter = 0;
+    }
+  }
+  if (counter >= 4) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 function switchPlayer(){
   if (currentPlayer === "red") {
